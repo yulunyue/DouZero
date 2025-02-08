@@ -184,7 +184,11 @@ def train(flags):
         for i in range(flags.num_threads):
             for position in ['landlord', 'landlord_up', 'landlord_down']:
                 thread = threading.Thread(
-                    target=batch_and_learn, name='batch-and-learn-%d' % i, args=(i,device,position,locks[device][position],position_locks[position]))
+                    target=batch_and_learn, 
+                    name=f'batch-and-learn-{i}-{position}', 
+                    args=(i,device,position,locks[device][position],position_locks[position])
+             
+                )
                 thread.start()
                 threads.append(thread)
     
